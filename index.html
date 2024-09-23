@@ -30,50 +30,24 @@
             color: #fff;
             text-decoration: none;
         }
-        /* Chat Styles */
-        #chat-container {
-            background-color: #222;
-            padding: 15px;
-            border: 1px solid #fff;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-        .message {
-            color: #fff;
-        }
-        .username {
-            color: lightgreen;
-            font-weight: bold;
-        }
-        #chat-form {
-            display: flex;
-            margin-top: 10px;
-        }
-        #nickname, #message {
-            flex: 1;
-            padding: 10px;
-            margin-right: 5px;
-            border: 1px solid #fff;
-            background-color: #000;
-            color: #fff;
-        }
-        #send {
-            padding: 10px;
+        .file-link {
             background-color: #fff;
             color: #000;
-            border: none;
-            cursor: pointer;
+            padding: 10px;
+            margin: 10px 0;
+            display: inline-block;
         }
-        #send:hover {
+        .file-link:hover {
             background-color: #000;
             color: #fff;
+            border: 1px solid #fff;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>44.2.222.55</h1>
+        <h1> 44.2.222.55</h1>
     </header>
 
     <section>
@@ -82,42 +56,12 @@
     </section>
 
     <section>
-        <h2>Chat</h2>
-        <div id="chat-container"></div>
-        <form id="chat-form" onsubmit="return sendMessage();">
-            <input type="text" id="nickname" placeholder="Enter your nickname" required>
-            <input type="text" id="message" placeholder="Type your message..." required>
-            <button type="submit" id="send">Send</button>
-        </form>
+        <h2>Files</h2>
+        <a class="https://raw.githubusercontent.com/1112-bit/files/refs/heads/main/Storage/Storage_Cleaner.bat?token=GHSAT0AAAAAACX5HUPNIZA2VJXNUHLCHPN2ZXRWVFQ" href="#" download>Download File 1</a><br>
+        <a class="file-link" href="#" download>Download File 1</a><br>
+        <a class="file-link" href="#" download>Download File 2</a><br>
+        <a class="file-link" href="#" download>Download File 3</a>
     </section>
-
-    <script>
-        const ws = new WebSocket('ws://localhost:8080');
-
-        ws.onmessage = function(event) {
-            const data = JSON.parse(event.data);
-            displayMessage(data.nickname, data.message);
-        };
-
-        function sendMessage() {
-            const nickname = document.getElementById('nickname').value;
-            const message = document.getElementById('message').value;
-
-            ws.send(JSON.stringify({ nickname: nickname, message: message }));
-
-            document.getElementById('message').value = ''; // Clear the input
-            return false; // Prevent form submission
-        }
-
-        function displayMessage(nickname, message) {
-            const chatContainer = document.getElementById('chat-container');
-            const messageElement = document.createElement('div');
-            messageElement.classList.add('message');
-            messageElement.innerHTML = `<span class="username">${nickname}:</span> ${message}`;
-            chatContainer.appendChild(messageElement);
-            chatContainer.scrollTop = chatContainer.scrollHeight; // Scroll to the bottom
-        }
-    </script>
 
 </body>
 </html>
